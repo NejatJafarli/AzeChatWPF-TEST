@@ -55,9 +55,12 @@
                     </Ellipse.Fill>
                 </Ellipse>
             </Grid>
-            <ScrollViewer Grid.Row="2" >
-                <StackPanel  Name="MessagesPanel"/>
-            </ScrollViewer>
+            <ListBox  Name="MessagesPanel" Grid.Row="2" Background="#F0F1EC" HorizontalContentAlignment="Stretch"
+                      ScrollViewer.CanContentScroll="False"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Visible">
+                
+            </ListBox>
             <Border Grid.Row="3" CornerRadius="0 0 25 25" Background="White" BorderBrush="LightGray" BorderThickness="3">
                 <Grid >
                     <Grid.ColumnDefinitions>

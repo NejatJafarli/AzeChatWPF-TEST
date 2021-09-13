@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AzeChat"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="250">
-    <Border x:Name="MainBorder" Background="#EB2260" CornerRadius="10">
+    <Border x:Name="MainBorder" Background="#EB2260" CornerRadius="10" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>

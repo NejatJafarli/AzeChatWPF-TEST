@@ -34,7 +34,7 @@ namespace AzeChat
 			TimeText.Text += ":";
 			TimeText.Text += temp.Minute.ToString();
 
-			DispatcherTimer timer= new DispatcherTimer();
+			DispatcherTimer timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromSeconds(30);
 			timer.Tick += Timer_Tick;
 			timer.Start();
@@ -42,7 +42,7 @@ namespace AzeChat
 
 		private void Timer_Tick(object sender, EventArgs e)
 		{
-			var temp=DateTime.Now;
+			var temp = DateTime.Now;
 			TimeText.Text = temp.Hour.ToString();
 			TimeText.Text += ":";
 			TimeText.Text += temp.Minute.ToString();
@@ -63,10 +63,23 @@ namespace AzeChat
 			UserMessage.DataText.FontSize = 20;
 			UserMessage.HorizontalAlignment = HorizontalAlignment.Right;
 			UserMessage.Margin = new Thickness(10, 8, 5, 0);
+			MessagesPanel.Items.Add(UserMessage);
+
+			MyUserMessageUC ReMessage = new MyUserMessageUC();
+
+			ReMessage.MainBorder.Background = Brushes.LightGray;
+			ReMessage.DataText.Foreground = Brushes.Black;
+			ReMessage.DataText.Text = DataText.Text;
+			ReMessage.DataText.FontSize = 20;
+			ReMessage.HorizontalAlignment = HorizontalAlignment.Left;
+			ReMessage.Margin = new Thickness(0, 0, 0, 10);
+			MessagesPanel.Items.Add(ReMessage);
+
+
+			MessagesPanel.Items.MoveCurrentToLast();
+			MessagesPanel.ScrollIntoView(MessagesPanel.Items.CurrentItem);
+
 			DataText.Text = "";
-			MessagesPanel.Children.Add(UserMessage);
-
-
 			DataText.Focus();
 		}
 
@@ -78,7 +91,7 @@ namespace AzeChat
 
 		private void Window_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.Key==Key.Enter)
+			if (e.Key == Key.Enter)
 			{
 				ImageBrush_MouseDown(sender, null);
 			}
