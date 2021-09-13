@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AzeChat"
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="150">
+             d:DesignHeight="40" d:DesignWidth="250">
     <Border x:Name="MainBorder" Background="#EB2260" CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
@@ -13,7 +13,7 @@
                 <RowDefinition Height="1.3*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="1" HorizontalAlignment="Right" Margin="0 0 5 0" FontSize="8" FontWeight="Bold" Foreground="Black" Name="TimeText"></TextBlock>
-            <TextBlock Name="DataText" TextWrapping="Wrap" Foreground="White" FontSize="7" MaxWidth="100" Margin="3 3 0 0"></TextBlock>
+            <TextBlock Name="DataText" TextWrapping="Wrap" Foreground="White" FontSize="7" Margin="3 3 0 0"></TextBlock>
         </Grid>
     </Border>
 </UserControl>

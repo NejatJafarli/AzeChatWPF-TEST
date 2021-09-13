@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:local="clr-namespace:AzeChat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="300"
-        WindowStyle="None" Background="Transparent" BorderThickness="0" AllowsTransparency="True" >
+        Title="MainWindow" Height="550" Width="300" MinHeight="550" MinWidth="300"
+        WindowStyle="None" Background="Transparent" BorderThickness="0" AllowsTransparency="True" KeyDown="Window_KeyDown" ResizeMode="CanResizeWithGrip">
     <Border Background="#EFF0EB" CornerRadius="30" MouseDown="TopGrid_MouseDown">
         <Grid>
             <Grid.RowDefinitions>
@@ -22,9 +21,16 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Left" Margin="15 5" FontWeight="Bold" Name="TimeText"></TextBlock>
-                <Image Source="https://img.icons8.com/ios-glyphs/30/000000/full-battery.png" Grid.Column="1" HorizontalAlignment="Right" Margin="15 2"></Image>
-                <Image Source="https://img.icons8.com/external-flatart-icons-solid-flatarticons/64/000000/external-wifi-network-and-cloud-computing-flatart-icons-solid-flatarticons.png" Grid.Column="1" HorizontalAlignment="Right" Margin="40 2"></Image>
-                <Image Source="https://img.icons8.com/ios-glyphs/30/000000/high-connection.png" Grid.Column="1" HorizontalAlignment="Center" Margin="50 2"></Image>
+                <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 20 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image   Source="https://img.icons8.com/ios-glyphs/30/000000/full-battery.png" Grid.Column="2" ></Image>
+                    <Image Source="https://img.icons8.com/external-flatart-icons-solid-flatarticons/64/000000/external-wifi-network-and-cloud-computing-flatart-icons-solid-flatarticons.png" Grid.Column="1"></Image>
+                    <Image  Source="https://img.icons8.com/ios-glyphs/30/000000/high-connection.png" Grid.Column="0" ></Image>
+                </Grid>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -32,7 +38,7 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Source="https://img.icons8.com/external-those-icons-fill-those-icons/24/C4174D/external-left-arrows-those-icons-fill-those-icons-8.png" Width="40" Height="30" Margin="0 0 25 0"></Image>
+                <Image HorizontalAlignment="Left" MouseDown="Image_MouseDown" Source="https://img.icons8.com/external-those-icons-fill-those-icons/24/C4174D/external-left-arrows-those-icons-fill-those-icons-8.png" Margin="10 15 25 15"></Image>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -42,18 +48,16 @@
                     <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="12" Foreground="#C0C1BC">SSD online</TextBlock>
 
                 </Grid>
-                <Ellipse Height="60" Width="60" Grid.Column="2">
+                <Ellipse Height="60" Width="60" Grid.Column="2" HorizontalAlignment="Right" Margin="0 0 10 0" >
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="zahid.png">
                         </ImageBrush>
                     </Ellipse.Fill>
                 </Ellipse>
             </Grid>
-            <StackPanel Grid.Row="2">
-                <local:MyUserMessageUC Width="150" Height="40" HorizontalAlignment="Right"></local:MyUserMessageUC>
-                <local:MyUserMessageUC Width="150" Height="40" HorizontalAlignment="Left"></local:MyUserMessageUC>
-                <local:MyUserMessageUC Width="150" Height="40" HorizontalAlignment="Right"></local:MyUserMessageUC>
-            </StackPanel>
+            <ScrollViewer Grid.Row="2" >
+                <StackPanel  Name="MessagesPanel"/>
+            </ScrollViewer>
             <Border Grid.Row="3" CornerRadius="0 0 25 25" Background="White" BorderBrush="LightGray" BorderThickness="3">
                 <Grid >
                     <Grid.ColumnDefinitions>
@@ -62,11 +66,11 @@
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="1.3*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="1" Style="{StaticResource TextBoxRevealStyle}" fw:Extensions.Header="Header" fw:Extensions.PlaceholderText="Type Message" VerticalContentAlignment="Center" TextWrapping="Wrap" BorderThickness="0" Background="#FDFDFD" ></TextBox>
-                    <Image Source="https://img.icons8.com/material-outlined/48/555861/happy--v1.png" Cursor="Hand"></Image>
-                    <Ellipse Grid.Column="2" >
+                    <TextBox FontSize="20"  Name="DataText" Grid.Column="1"  TextWrapping="Wrap" BorderThickness="0" Background="#FDFDFD" ></TextBox>
+                    <Image Source="https://img.icons8.com/material-outlined/300/555861/happy--v1.png" Cursor="Hand"></Image>
+                    <Ellipse Grid.Column="2" MouseLeftButtonDown="ImageBrush_MouseDown" >
                         <Ellipse.Fill>
-                            <ImageBrush Mouse.MouseDown="ImageBrush_MouseDown" ImageSource="sent.png"></ImageBrush>
+                            <ImageBrush  ImageSource="sent.png"></ImageBrush>
                         </Ellipse.Fill>
                     </Ellipse>
                 </Grid>

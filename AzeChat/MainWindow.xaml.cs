@@ -26,6 +26,9 @@ namespace AzeChat
 		{
 			InitializeComponent();
 
+			DataText.Focus();
+
+
 			var temp = DateTime.Now;
 			TimeText.Text = temp.Hour.ToString();
 			TimeText.Text += ":";
@@ -44,7 +47,7 @@ namespace AzeChat
 			TimeText.Text += ":";
 			TimeText.Text += temp.Minute.ToString();
 		}
-		void TopGrid_MouseDown(object sender, MouseButtonEventArgs e)
+		private void TopGrid_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			//you must be change there Event useButtonState.Presse )
 			if (e.LeftButton == MouseButtonState.Pressed)
@@ -55,9 +58,29 @@ namespace AzeChat
 
 		private void ImageBrush_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.LeftButton==MouseButtonState.Released)
-			{
+			MyUserMessageUC UserMessage = new MyUserMessageUC();
+			UserMessage.DataText.Text = DataText.Text;
+			UserMessage.DataText.FontSize = 20;
+			UserMessage.HorizontalAlignment = HorizontalAlignment.Right;
+			UserMessage.Margin = new Thickness(10, 8, 5, 0);
+			DataText.Text = "";
+			MessagesPanel.Children.Add(UserMessage);
 
+
+			DataText.Focus();
+		}
+
+		private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			Application.Current.Shutdown();
+		}
+
+
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key==Key.Enter)
+			{
+				ImageBrush_MouseDown(sender, null);
 			}
 		}
 	}
