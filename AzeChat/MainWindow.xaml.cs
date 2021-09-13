@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -22,12 +23,18 @@ namespace AzeChat
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		List<string> Cavablar= new List<string>();
+		Random random = new Random();
 		public MainWindow()
 		{
 			InitializeComponent();
 
 			DataText.Focus();
 
+			Cavablar.Add("Goresen Biz Ha Vaxt Isleyeceyik?");
+			Cavablar.Add("Sabah Derse Gelecem");
+			Cavablar.Add("Valorant Gelirsiz?");
+			Cavablar.Add("Usaqlar Mene Kodu Atinda Geride Qaldim");
 
 			var temp = DateTime.Now;
 			TimeText.Text = temp.Hour.ToString();
@@ -49,7 +56,6 @@ namespace AzeChat
 		}
 		private void TopGrid_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			//you must be change there Event useButtonState.Presse )
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
 				DragMove();
@@ -58,29 +64,42 @@ namespace AzeChat
 
 		private void ImageBrush_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			MyUserMessageUC UserMessage = new MyUserMessageUC();
-			UserMessage.DataText.Text = DataText.Text;
-			UserMessage.DataText.FontSize = 20;
-			UserMessage.HorizontalAlignment = HorizontalAlignment.Right;
-			UserMessage.Margin = new Thickness(10, 8, 5, 0);
-			MessagesPanel.Items.Add(UserMessage);
+			if (DataText.Text.Length > 0)
+			{
+				MyUserMessageUC UserMessage = new MyUserMessageUC();
+				UserMessage.DataText.Text = DataText.Text;
+				UserMessage.DataText.FontSize = 20;
+				UserMessage.HorizontalAlignment = HorizontalAlignment.Right;
+				UserMessage.Margin = new Thickness(10, 8, 5, 0);
+				MessagesPanel.Items.Add(UserMessage);
 
-			MyUserMessageUC ReMessage = new MyUserMessageUC();
+				MyUserMessageUC ReMessage = new MyUserMessageUC();
 
-			ReMessage.MainBorder.Background = Brushes.LightGray;
-			ReMessage.DataText.Foreground = Brushes.Black;
-			ReMessage.DataText.Text = DataText.Text;
-			ReMessage.DataText.FontSize = 20;
-			ReMessage.HorizontalAlignment = HorizontalAlignment.Left;
-			ReMessage.Margin = new Thickness(0, 0, 0, 10);
-			MessagesPanel.Items.Add(ReMessage);
+				Task.Run(() =>
+				{
+					Thread.Sleep(500);
+
+					Application.Current.Dispatcher.Invoke(() =>
+					{
+						ReMessage.DataText.Foreground = Brushes.Black;
+						ReMessage.DataText.Text = Cavablar[random.Next(0,Cavablar.Count)];
+						ReMessage.DataText.FontSize = 20;
+						ReMessage.HorizontalAlignment = HorizontalAlignment.Left;
+						ReMessage.Margin = new Thickness(0, 0, 0, 10);
+						ReMessage.MainBorder.Background = Brushes.LightGray;
+						MessagesPanel.Items.Add(ReMessage);
+						MessagesPanel.Items.MoveCurrentToLast();
+						MessagesPanel.ScrollIntoView(MessagesPanel.Items.CurrentItem);
+					});
+				});
+				DataText.Text = "";
 
 
-			MessagesPanel.Items.MoveCurrentToLast();
-			MessagesPanel.ScrollIntoView(MessagesPanel.Items.CurrentItem);
+				MessagesPanel.Items.MoveCurrentToLast();
+				MessagesPanel.ScrollIntoView(MessagesPanel.Items.CurrentItem);
 
-			DataText.Text = "";
-			DataText.Focus();
+				DataText.Focus();
+			}
 		}
 
 		private void Image_MouseDown(object sender, MouseButtonEventArgs e)

@@ -65,13 +65,13 @@
                 <Grid >
                     <Grid.ColumnDefinitions>
 
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBox FontSize="20"  Name="DataText" Grid.Column="1"  TextWrapping="Wrap" BorderThickness="0" Background="#FDFDFD" ></TextBox>
-                    <Image Source="https://img.icons8.com/material-outlined/300/555861/happy--v1.png" Cursor="Hand"></Image>
-                    <Ellipse Grid.Column="2" MouseLeftButtonDown="ImageBrush_MouseDown" >
+                    <Image Source="https://img.icons8.com/material-outlined/300/555861/happy--v1.png" Cursor="Hand" Width="60"></Image>
+                    <Ellipse Grid.Column="2" MouseLeftButtonDown="ImageBrush_MouseDown" Width="70"  >
                         <Ellipse.Fill>
                             <ImageBrush  ImageSource="sent.png"></ImageBrush>
                         </Ellipse.Fill>
